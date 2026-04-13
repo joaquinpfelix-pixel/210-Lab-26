@@ -11,7 +11,7 @@
 using namespace std;
 
 // Named constants
-const string FILE_NAME = "names.txt";
+const string FILE_NAME = "codes.txt";
 const int NUM_OPERATIONS = 4;
 const int NUM_STRUCTURES = 3;
 
@@ -153,7 +153,15 @@ int main()
 
     int avg[4][3] = {0};
 
-    for (int i = 0)
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            avg[i][j] = results[1][i][j] / NUM_RUNS;
+        }
+    }
+
+    avg[1][2] = 0;
     
     // =========================
     // OUTPUT
@@ -162,24 +170,24 @@ int main()
     cout << "Number of Simulations: " << NUM_RUNS << endl;
     cout << " Operation    Vector      List       Set\n";
     cout << "      Read"
-         << setw(10) << results[0][0]
-         << setw(10) << results[0][1]
-         << setw(10) << results[0][2] << endl;
+         << setw(10) << avg[0][0]
+         << setw(10) << avg[0][1]
+         << setw(10) << avg[0][2] << endl;
 
     cout << "      Sort"
-         << setw(10) << results[1][0]
-         << setw(10) << results[1][1]
-         << setw(10) << results[1][2] << endl;
+         << setw(10) << avg[1][0]
+         << setw(10) << avg[1][1]
+         << setw(10) << avg[1][2] << endl;
 
     cout << "    Insert"
-         << setw(10) << results[2][0]
-         << setw(10) << results[2][1]
-         << setw(10) << results[2][2] << endl;
+         << setw(10) << avg[2][0]
+         << setw(10) << avg[2][1]
+         << setw(10) << avg[2][2] << endl;
 
     cout << "    Delete"
-         << setw(10) << results[3][0]
-         << setw(10) << results[3][1]
-         << setw(10) << results[3][2] << endl;
+         << setw(10) << avg[3][0]
+         << setw(10) << avg[3][1]
+         << setw(10) << avg[3][2] << endl;
 
     return 0;
 }
