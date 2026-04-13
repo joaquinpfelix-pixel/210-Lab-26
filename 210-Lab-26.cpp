@@ -15,6 +15,12 @@ const string FILE_NAME = "codes.txt";
 const int NUM_OPERATIONS = 4;
 const int NUM_STRUCTURES = 3;
 
+//results[2][4][3]
+// [0] = current run results
+// [1] = accumulated totals
+// 4 = operations (read, sort, insert, delete)
+// 3 = structures (vector, list, set)
+
 // Function prototypes
 vector<string> load_names();
 
@@ -32,6 +38,7 @@ int main()
     const int NUM_RUNS = 15;
     int results[2][4][3] = {0};
 
+    // Run exeperiment multiple time for more reliable timing data
     for (int run = 0; run < NUM_RUNS; run++){
         vector<string> v;
         list<string> l;
