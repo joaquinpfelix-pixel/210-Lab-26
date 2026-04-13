@@ -28,40 +28,44 @@ int main()
         return 1;
     }
 
-    // results[operation][structure]
-    int results[NUM_OPERATIONS][NUM_STRUCTURES] = {0};
+    
+    const int NUM_RUNS = 15;
+    int results[2][4][3] = {0};
 
-    vector<string> v;
-    list<string> l;
-    set<string> s;
+    for (int run = 0; run < NUM_RUNS; run++){
+        vector<string> v;
+        list<string> l;
+        set<string> s;
 
-    // =========================
-    // READ
-    // =========================
+        // =========================
+        // READ
+        // =========================
 
-    auto start = chrono::high_resolution_clock::now();
+        auto start = chrono::high_resolution_clock::now();
 
-    for (string name : names)
-        v.push_back(name);
+        for (string name : names)
+            v.push_back(name);
 
-    auto end = chrono::high_resolution_clock::now();
-    results[0][0] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+        auto end = chrono::high_resolution_clock::now();
+        results[0][0][0] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+        results[1][0][0] += results[0][0][0];
 
-    start = chrono::high_resolution_clock::now();
+        start = chrono::high_resolution_clock::now();
 
-    for (string name : names)
-        l.push_back(name);
+        for (string name : names)
+            l.push_back(name);
 
-    end = chrono::high_resolution_clock::now();
-    results[0][1] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+        end = chrono::high_resolution_clock::now();
+        results[0][0][1] = chrono::duration_cast<chrono::microseconds>(end - start).count();
 
-    start = chrono::high_resolution_clock::now();
+        start = chrono::high_resolution_clock::now();
 
-    for (string name : names)
-        s.insert(name);
+        for (string name : names)
+            s.insert(name);
 
-    end = chrono::high_resolution_clock::now();
-    results[0][2] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+        end = chrono::high_resolution_clock::now();
+        results[0][2] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+    }
 
     // =========================
     // SORT
