@@ -66,9 +66,8 @@ int main()
 
         end = chrono::high_resolution_clock::now();
         results[0][0][2] = chrono::duration_cast<chrono::microseconds>(end - start).count();
-        results[1][0][2] += results[0][0][1];
+        results[1][0][2] += results[0][0][2];
 
-        cout << "Run " << run + 1<< " completed.\n";
 
         // =========================
         // SORT
@@ -80,6 +79,7 @@ int main()
 
         end = chrono::high_resolution_clock::now();
         results[0][1][0] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+        results[1][1][0] += results[0][1][0];
 
         start = chrono::high_resolution_clock::now();
 
@@ -87,8 +87,10 @@ int main()
 
         end = chrono::high_resolution_clock::now();
         results[0][1][1] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+        results[1][1][1] += results[0][1][1];
 
         results[0][1][2] = -1; // set is already sorted
+        results[1][1][2] += results[0][1][2];
 
         // =========================
         // INSERT
@@ -100,6 +102,7 @@ int main()
 
         end = chrono::high_resolution_clock::now();
         results[0][2][0] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+        results[1][2][0] += results[0][2][0];
 
         start = chrono::high_resolution_clock::now();
 
@@ -107,6 +110,7 @@ int main()
 
         end = chrono::high_resolution_clock::now();
         results[0][2][1] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+        results[1][2][1] += results[0][2][1];
 
         start = chrono::high_resolution_clock::now();
 
@@ -114,6 +118,7 @@ int main()
 
         end = chrono::high_resolution_clock::now();
         results[0][2][2] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+        results[1][2][2] += results[0][2][2];
 
         // =========================
         // DELETE
@@ -125,6 +130,7 @@ int main()
 
         end = chrono::high_resolution_clock::now();
         results[0][3][0] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+        results[1][3][0] += results[0][3][0];
 
         start = chrono::high_resolution_clock::now();
 
@@ -132,6 +138,7 @@ int main()
 
         end = chrono::high_resolution_clock::now();
         results[0][3][1] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+        results[1][3][1] += results[0][3][1];
 
         start = chrono::high_resolution_clock::now();
 
@@ -139,14 +146,20 @@ int main()
 
         end = chrono::high_resolution_clock::now();
         results[0][3][2] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+        results[1][3][2] += results[0][3][2];
 
+        cout << "Run " << run + 1<< " completed.\n";
     }
 
+    int avg[4][3] = {0};
+
+    for (int i = 0)
     
     // =========================
     // OUTPUT
     // =========================
 
+    cout << "Number of Simulations: " << NUM_RUNS << endl;
     cout << " Operation    Vector      List       Set\n";
     cout << "      Read"
          << setw(10) << results[0][0]
