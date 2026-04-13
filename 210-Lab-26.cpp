@@ -57,6 +57,7 @@ int main()
 
         end = chrono::high_resolution_clock::now();
         results[0][0][1] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+        results[1][0][1] += results[0][0][1];
 
         start = chrono::high_resolution_clock::now();
 
@@ -64,79 +65,84 @@ int main()
             s.insert(name);
 
         end = chrono::high_resolution_clock::now();
-        results[0][2] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+        results[0][0][2] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+        results[1][0][2] += results[0][0][1];
+
+        cout << "Run " << run + 1<< " completed.\n";
+
+        // =========================
+        // SORT
+        // =========================
+
+        start = chrono::high_resolution_clock::now();
+
+        sort(v.begin(), v.end());
+
+        end = chrono::high_resolution_clock::now();
+        results[0][1][0] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+
+        start = chrono::high_resolution_clock::now();
+
+        l.sort();
+
+        end = chrono::high_resolution_clock::now();
+        results[0][1][1] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+
+        results[0][1][2] = -1; // set is already sorted
+
+        // =========================
+        // INSERT
+        // =========================
+
+        start = chrono::high_resolution_clock::now();
+
+        v.push_back("Zelda");
+
+        end = chrono::high_resolution_clock::now();
+        results[0][2][0] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+
+        start = chrono::high_resolution_clock::now();
+
+        l.push_back("Zelda");
+
+        end = chrono::high_resolution_clock::now();
+        results[0][2][1] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+
+        start = chrono::high_resolution_clock::now();
+
+        s.insert("Zelda");
+
+        end = chrono::high_resolution_clock::now();
+        results[0][2][2] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+
+        // =========================
+        // DELETE
+        // =========================
+
+        start = chrono::high_resolution_clock::now();
+
+        v.pop_back();
+
+        end = chrono::high_resolution_clock::now();
+        results[0][3][0] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+
+        start = chrono::high_resolution_clock::now();
+
+        l.pop_back();
+
+        end = chrono::high_resolution_clock::now();
+        results[0][3][1] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+
+        start = chrono::high_resolution_clock::now();
+
+        s.erase("Zelda");
+
+        end = chrono::high_resolution_clock::now();
+        results[0][3][2] = chrono::duration_cast<chrono::microseconds>(end - start).count();
+
     }
 
-    // =========================
-    // SORT
-    // =========================
-
-    start = chrono::high_resolution_clock::now();
-
-    sort(v.begin(), v.end());
-
-    end = chrono::high_resolution_clock::now();
-    results[1][0] = chrono::duration_cast<chrono::microseconds>(end - start).count();
-
-    start = chrono::high_resolution_clock::now();
-
-    l.sort();
-
-    end = chrono::high_resolution_clock::now();
-    results[1][1] = chrono::duration_cast<chrono::microseconds>(end - start).count();
-
-    results[1][2] = -1; // set is already sorted
-
-    // =========================
-    // INSERT
-    // =========================
-
-    start = chrono::high_resolution_clock::now();
-
-    v.push_back("Zelda");
-
-    end = chrono::high_resolution_clock::now();
-    results[2][0] = chrono::duration_cast<chrono::microseconds>(end - start).count();
-
-    start = chrono::high_resolution_clock::now();
-
-    l.push_back("Zelda");
-
-    end = chrono::high_resolution_clock::now();
-    results[2][1] = chrono::duration_cast<chrono::microseconds>(end - start).count();
-
-    start = chrono::high_resolution_clock::now();
-
-    s.insert("Zelda");
-
-    end = chrono::high_resolution_clock::now();
-    results[2][2] = chrono::duration_cast<chrono::microseconds>(end - start).count();
-
-    // =========================
-    // DELETE
-    // =========================
-
-    start = chrono::high_resolution_clock::now();
-
-    v.pop_back();
-
-    end = chrono::high_resolution_clock::now();
-    results[3][0] = chrono::duration_cast<chrono::microseconds>(end - start).count();
-
-    start = chrono::high_resolution_clock::now();
-
-    l.pop_back();
-
-    end = chrono::high_resolution_clock::now();
-    results[3][1] = chrono::duration_cast<chrono::microseconds>(end - start).count();
-
-    start = chrono::high_resolution_clock::now();
-
-    s.erase("Zelda");
-
-    end = chrono::high_resolution_clock::now();
-    results[3][2] = chrono::duration_cast<chrono::microseconds>(end - start).count();
-
+    
     // =========================
     // OUTPUT
     // =========================
